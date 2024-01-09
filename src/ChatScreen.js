@@ -4,12 +4,7 @@ import LoadingBar from "react-top-loading-bar";
 function ChatScreen() {
   const [progress, setProgress] = useState(0);
   const BaseUrl = "http://127.0.0.1:8000/";
-  const [timer, setTimer] = useState(0);
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("session-token") || ""
-  );
   const [inputValue, setInputValue] = useState("");
-  const [messages, setMessages] = useState([]);
 
   const renderMessageToScreen = (args) => {
     const displayDate = (args.time || getCurrentTimestamp()).toLocaleString(
@@ -101,6 +96,10 @@ class="chart_image"
     });
     console.log("message rendered to screen", getCurrentTimestamp());
   };
+  useEffect(() => {
+    console.log("useEffect in ChatScreen is running");
+    showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
+  }, []);
 
   const getMessageText = (message) => {
     if (typeof message === "object") {
@@ -172,12 +171,6 @@ class="chart_image"
                           handleSendButtonClick();
                         }
                       }}
-                    />
-                    <img
-                      src="desktop/backend/exports/charts/temp_chart.png"
-                      style={{ height: "50px", width: "50px" }}
-                      alt="Chart"
-                      className="chart"
                     />
 
                     <button
