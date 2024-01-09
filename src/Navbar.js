@@ -2,33 +2,48 @@ import React from "react";
 
 function Navbar() {
   return (
-    <nav
+    <div
       className="navbar navbar-expand-lg sticky-top"
-      style={{ background: "#12262e" }}
+      style={{
+        background: "#9bb5a9",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#" style={{ color: "white" }}>
+      <div style={{ textAlign: "center" }}>
+        <a
+          className="navbar-brand"
+          href="#"
+          style={{
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <img
             src="logo.png"
-            style={{ height: "50px", width: "50px" }}
+            className=""
+            style={{
+              height: "50px",
+              width: "50px",
+              marginRight: "10px",
+              borderRight: "3px solid rgb(87, 87, 87)",
+            }}
             alt="logo"
-            className="imagelogo"
           />
-          BizMetric AI-BOT
+          <span>BizMetric AI-BOT</span>
         </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul
+      </div>
+    </div>
+  );
+}
+
+export default Navbar;
+
+{
+  /* <ul
             className="navbar-nav me-auto mb-2 mb-lg-0"
             style={{ color: "white" }}
           >
@@ -41,8 +56,10 @@ function Navbar() {
               <a className="nav-link" href="#">
                 Link
               </a>
-            </li>
-            {/* <li className="nav-item dropdown">
+            </li> */
+}
+{
+  /* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -77,9 +94,13 @@ function Navbar() {
               <a className="nav-link disabled" aria-disabled="true">
                 Disabled
               </a>
-            </li> */}
-          </ul>
-          <form className="d-flex" role="search">
+            </li> */
+}
+{
+  /* </ul> */
+}
+{
+  /* <form className="d-flex" role="search">
             <input
               className="form-control me-2"
               type="search"
@@ -89,11 +110,5 @@ function Navbar() {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  );
+          </form> */
 }
-
-export default Navbar;

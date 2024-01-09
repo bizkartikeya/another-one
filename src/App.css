@@ -12,7 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+body{
+background-color: #cfe1fe;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -44,7 +46,7 @@ border-right: 3px solid rgb(87, 87, 87);
 }
 
 .message {
-  padding: 8px;
+  padding: 2px;
   margin-bottom: 8px;
   word-wrap: break-word;
   overflow: hidden;
@@ -55,22 +57,15 @@ border-right: 3px solid rgb(87, 87, 87);
 }
 
 
-.nav-link{
-color:white
-}
 
-.nav-link.active {
-    color: #00f !important
-  }
-
-
-.inputbox {
+/* .inputbox {
   position: sticky;
   bottom: 0;
   width: 100%;
+  height:50px;
   background-color: white;
   padding: 10px;
-}
+} */
 .message-input {
   display: flex;
   align-items: center;
@@ -100,7 +95,7 @@ margin: 20px;
 }
 
 .top_menu {
-  background-color: #fff;
+  background-color: #6a6e73;
   padding: 13px 0px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -110,7 +105,7 @@ margin: 20px;
 
 .top_menu .title {
   text-align: center;
-  color: #337ab7;
+  color: #21272c;
   font-size: 18px;
   margin-left: 10px;
 
@@ -141,10 +136,11 @@ margin: 20px;
 .messages {
   position: relative;
   list-style: none;
+  background-color: #d1e6dd;
   width: 100%;
   padding: 20px 10px 0 10px;
   margin: 0;
-  margin-bottom: 5px;
+  padding-bottom: 5px;
   min-height: 200px;
   max-height: 500px;
   overflow: scroll;
@@ -153,7 +149,7 @@ margin: 20px;
 .messages .message {
   clear: both;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   transition: all 0.5s linear;
   opacity: 0;
 }
@@ -170,7 +166,7 @@ margin: 20px;
   font-size: 10px;
   font-weight: 300;
   text-align: right;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 .messages .message.appeared {
@@ -179,13 +175,13 @@ margin: 20px;
 
 .messages .message .text_wrapper {
   display: inline-block;
-  padding: 20px;
-  border-radius: 6px;
-  min-width: 150px;
+  padding: 15px;
+  /* min-width: 150px; */
+  max-width: 350px;
   position: relative;
 }
 
-.messages .message .text_wrapper::after,
+/* .messages .message .text_wrapper::after,
 .messages .message .text_wrapper:before {
   top: 18px;
   border: solid transparent;
@@ -194,17 +190,17 @@ margin: 20px;
   width: 0;
   position: absolute;
   pointer-events: none;
-}
-
+} */
+/* 
 .messages .message .text_wrapper::after {
   border-width: 13px;
   margin-top: 0px;
-}
+} */
 
-.messages .message .text_wrapper::before {
+/* .messages .message .text_wrapper::before {
   border-width: 15px;
   margin-top: -2px;
-}
+} */
 
 /* bot message */
 
@@ -214,19 +210,21 @@ margin: 20px;
 }
 
 .messages .message.left .text_wrapper {
-  background-color: #f3eeca;
-  margin-left: 20px;
+  background-color: #1b313b;
+  color:white;
+  border-radius: 0px 25px 25px 25px;
+  margin-left: 5px;
   float: left;
 }
 
-.messages .message.left .text_wrapper::after,
+/* .messages .message.left .text_wrapper::after,
 .messages .message.left .text_wrapper::before {
   right: 100%;
   border-right-color: #f3eeca;
-}
+} */
 
 .messages .message.left .timestamp {
-  color: #b0742f;
+  color: #bba387;
 }
 
 /* user message */
@@ -241,15 +239,16 @@ margin: 20px;
 
 .messages .message.right .text_wrapper {
   background-color: #b0d4f3;
-  margin-right: 20px;
+  border-radius: 25px 0px 25px 25px;
+  margin-right: 5px;
   float: right;
 }
-
+/* 
 .messages .message.right .text_wrapper::after,
 .messages .message.right .text_wrapper::before {
   left: 100%;
   border-left-color: #b0d4f3;
-}
+} */
 
 .messages .message.right .timestamp {
   color: #1a5770;
@@ -266,18 +265,18 @@ margin: 20px;
 /* text inpur from user */
 
 .bottom_wrapper {
-  background-color: #fff;
-  padding: 20px;
+  background-color: #6a6e72;
+  padding: 5px;
   display: flex;
 }
 
 .bottom_wrapper #msg_input {
   flex-grow: 1;
   outline-width: 0;
-  padding: 12px;
+  padding: 5px;
+  background-color: #6a6e72;
   border: 1px solid #bcbdc0;
   border-radius: 50px;
-  margin-right: 15px;
 }
 
 .app_button_1 {
@@ -321,4 +320,43 @@ margin: 20px;
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+.inputbox{
+border: 1px solid black;
+background-color: none;
+border-radius: 10px;
+padding: 2px;
+}
+
+#messageInput {
+  padding: 0px;
+  background-color: #6a6e72;
+  color: white;
+  border-radius: 10px;
+}
+
+input::placeholder {
+  color: white;
+  /* Set the placeholder color to your desired color */
+}
+
+#sendButton {
+  transition: all ease 1s;
+   border-radius: 70px;
+  right: 0;
+
+  
+  
+  /* display: none; */
+  /* Initially hide the button */
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
