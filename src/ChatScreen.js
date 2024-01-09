@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import LoadingBar from "react-top-loading-bar";
 
 function ChatScreen() {
-  const inputRef = useRef(null); // Create a ref for the input element
+  const inputRef = useRef(null);
 
   const [progress, setProgress] = useState(0);
   const BaseUrl = "http://127.0.0.1:8000/";
