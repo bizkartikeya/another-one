@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import LoadingBar from "react-top-loading-bar";
 
 function ChatScreen() {
+  const [progress, setProgress] = useState(0);
   const BaseUrl = "http://127.0.0.1:8000/";
   const [timer, setTimer] = useState(0);
   const [accessToken, setAccessToken] = useState(
@@ -60,10 +62,12 @@ class="chart_image"
   };
 
   const sendtoAPI = async (endpoint, message) => {
+    setProgress(10);
     console.log("ye pucha hai miyan:", message);
     const params = JSON.stringify(message);
     const url = BaseUrl + endpoint;
     console.log("yha se aayega maamala bhai", url);
+    setProgress(50);
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -71,8 +75,10 @@ class="chart_image"
       },
       body: JSON.stringify(message),
     });
+    setProgress(70);
     const data = await response.json();
     console.log(data);
+    setProgress(100);
     if (data.base64_image) {
       const chart = "data:image/png;base64," + data.base64_image;
       showBotMessage(chart, getCurrentTimestamp());
@@ -132,56 +138,69 @@ class="chart_image"
   const getCurrentTimestamp = () => new Date();
 
   return (
-    <div>
-      <div
-        className="chatWindow"
-        id="mainChatWindow"
-        style={{ display: "block", marginTop: "10px" }}
-      >
-        <div>
+    <>
+      <div>
+        <div
+          className="chatWindow"
+          id="mainChatWindow"
+          style={{ display: "block", marginTop: "10px" }}
+        >
           <div>
-            <div className="chat_window">
-              <div className="window">
-                <div className="top_menu">
-                  <div class="title">Hi, Ask your queries</div>
-                </div>
-
-                {/* dynamically rendered */}
-                <ul className="messages"></ul>
-
-                {/* input */}
-                <div className="bottom_wrapper fixed-bottom">
-                  <input
-                    id="msg_input"
-                    placeholder="Say Hi to begin chat..."
-                    value={inputValue}
-                    onChange={handleInputChange}
+            <div>
+              <div className="chat_window">
+                <div className="window">
+                  <div className="top_menu">
+                    <div class="title">Hi, Ask your queries</div>
+                  </div>
+                  <LoadingBar
+                    color="#9bb5a9"
+                    progress={progress}
+                    onLoaderFinished={() => setProgress(0)}
                   />
-                  <img
-                    src="desktop/backend/exports/charts/temp_chart.png"
-                    style={{ height: "50px", width: "50px" }}
-                    alt="Chart"
-                    className="chart"
-                  />
+                  {/* dynamically rendered */}
+                  <ul className="messages"></ul>
 
-                  <button
-                    id="send_button"
-                    // disabled={inputValue ? true : false}
-                    className="app_button_1"
-                    style={{ backgroundColor: inputValue ? "#00aa89" : "grey" }}
-                    onClick={handleSendButtonClick}
-                  >
-                    Send
-                  </button>
+                  {/* input */}
+                  <div className="bottom_wrapper fixed-bottom">
+                    <input
+                      id="msg_input"
+                      placeholder="Say Hi to begin chat..."
+                      value={inputValue}
+                      onChange={handleInputChange}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleSendButtonClick();
+                        }
+                      }}
+                    />
+                    <img
+                      src="desktop/backend/exports/charts/temp_chart.png"
+                      style={{ height: "50px", width: "50px" }}
+                      alt="Chart"
+                      className="chart"
+                    />
+
+                    <button
+                      id="send_button"
+                      // disabled={inputValue ? true : false}
+                      className="app_button_1"
+                      style={{
+                        backgroundColor: inputValue ? "#00aa89" : "grey",
+                      }}
+                      onClick={handleSendButtonClick}
+                    >
+                      Send
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* left side content */}
+            {/* left side content */}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
