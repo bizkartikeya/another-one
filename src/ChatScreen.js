@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import LoadingBar from "react-top-loading-bar";
 
 function ChatScreen() {
+  const inputRef = useRef(null); // Create a ref for the input element
+
   const [progress, setProgress] = useState(0);
   const BaseUrl = "http://127.0.0.1:8000/";
   const [inputValue, setInputValue] = useState("");
@@ -77,8 +79,10 @@ class="chart_image"
     if (data.base64_image) {
       const chart = "data:image/png;base64," + data.base64_image;
       showBotMessage(chart, getCurrentTimestamp());
+      inputRef.current.focus();
     } else {
       showBotMessage(data.result, getCurrentTimestamp());
+      inputRef.current.focus();
     }
   };
 
@@ -97,6 +101,7 @@ class="chart_image"
     console.log("message rendered to screen", getCurrentTimestamp());
   };
   useEffect(() => {
+    inputRef.current.focus();
     console.log("useEffect in ChatScreen is running");
     showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
   }, []);
@@ -162,6 +167,7 @@ class="chart_image"
                   {/* input */}
                   <div className="bottom_wrapper fixed-bottom">
                     <input
+                      ref={inputRef}
                       id="msg_input"
                       placeholder="Say Hi to begin chat..."
                       value={inputValue}
