@@ -6,6 +6,11 @@ function ChatScreen() {
   const [button, setButton] = useState(false);
   const BaseUrl = "http://127.0.0.1:8000/";
   const [inputValue, setInputValue] = useState("");
+  const [lastGeneratedCode, setLastGeneratedCode] = useState("none");
+  const [resultValue, setResultValue] = useState({
+    result: "",
+    last_code_generated: "",
+  });
 
   const renderMessageToScreen = (args) => {
     const displayDate = (args.time || getCurrentTimestamp()).toLocaleString(
@@ -32,6 +37,29 @@ class="chart_image"
           
         ></img>
       </div>`;
+    } else if (args.text.includes("\n")) {
+      const rows = args.text.split("\n").map((row) => row.trim().split(/\s+/));
+
+      content = `<div>
+      <h2>Your Table</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            ${rows[0].map((header, index) => `<th key=${index}>${header}</th>`)}
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.slice(1).map(
+            (row, rowIndex) =>
+              `<tr key=${rowIndex}>
+              ${row.map(
+                (cell, cellIndex) => `<td key=${cellIndex}>${cell}</td>`
+              )}
+            </tr>`
+          )}
+        </tbody>
+      </table>
+    </div>`;
     } else {
       content = `<div class="text">${args.text}</div>`;
     }
@@ -77,9 +105,18 @@ class="chart_image"
     setProgress(100);
     if (data.base64_image) {
       const chart = "data:image/png;base64," + data.base64_image;
+      setLastGeneratedCode(data.last_code_generated);
+      setResultValue({
+        result: data.image_path.result,
+        last_code_generated: data.image_path.last_code_generated,
+      });
+      setLastGeneratedCode("block");
       showBotMessage(chart, getCurrentTimestamp());
     } else {
       showBotMessage(data.result, getCurrentTimestamp());
+      setLastGeneratedCode(data.last_code_generated);
+      setLastGeneratedCode("block");
+      setResultValue(data);
     }
   };
 
@@ -128,6 +165,7 @@ class="chart_image"
     } else {
       setButton(false);
     }
+    setLastGeneratedCode("none");
     setInputValue(e.target.value);
   };
 
@@ -145,14 +183,14 @@ class="chart_image"
 
   return (
     <>
-      <div className="container">
+      <div>
         <div
           className="chatWindow"
           id="mainChatWindow"
           style={{ display: "block", marginTop: "10px" }}
         >
           <div className="row padded_row">
-            <div className="col-md-7">
+            <div className="col-md-6">
               <div className="chat_window">
                 <div className="window">
                   <div className="top_menu">
@@ -217,7 +255,7 @@ class="chart_image"
             </div>
 
             {/* left side content */}
-            <div className="col-md-5">
+            <div className="col-md-6">
               <div className="chat_window">
                 <div className="top_menu">
                   <div className="title">Help</div>
@@ -235,21 +273,39 @@ class="chart_image"
                         aria-controls="collapseOne"
                         disabled
                       >
-                        BizMetric Customer Service chatbot
+                        <strong>Last Code Generated: </strong>
                       </button>
                     </h2>
                     <div
                       id="collapseOne"
-                      className="accordion-collapse collapse show"
+                      className="accordion-collapse collapse show no-wrap-div"
                       data-bs-parent="#accordionExample"
+                      style={{ maxWidth: "auto" }}
                     >
-                      <div className="accordion-body">
-                        Hi my name is
-                        <strong>BizMetric Customer Service </strong> chatbot, I
-                        am here to answer your queries about your loans and
-                        other finanace related stuff. Type in your query, and
-                        the chatbot will do its best to provide accurate and
-                        helpful information.
+                      <div
+                        className="accordion-body no-wrap-div"
+                        style={{
+                          textAlign: "left",
+                          display: `${lastGeneratedCode}`,
+                          overflow: "auto",
+                        }}
+                      >
+                        {"{"}
+                        <br></br>
+                        <strong>result:</strong> {resultValue.result}
+                      </div>
+                      <div
+                        className="accordion-body no-wrap-div"
+                        style={{
+                          textAlign: "left",
+                          display: `${lastGeneratedCode}`,
+                          overflow: "auto",
+                        }}
+                      >
+                        <strong>last_code_generated: </strong>
+                        {resultValue.last_code_generated}
+                        <br></br>
+                        {"}"}
                       </div>
                     </div>
                   </div>
