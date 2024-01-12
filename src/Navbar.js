@@ -1,12 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
-function Navbar() {
+function Navbar(props) {
+  let history = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    history("/");
+  };
   return (
     <div
       className="navbar navbar-expand-lg sticky-top"
       style={{
         background: "#9bb5a9",
-        display: "flex",
+        backdropFilter: "blur(20px)",
+        display: `${props.nav || "none"}`,
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -33,9 +40,12 @@ function Navbar() {
             }}
             alt="logo"
           />
-          <span>BizMetric AI-BOT</span>
+          <span>BizMetric Structured Data Analyser-BOT</span>
         </a>
       </div>
+      <button className="btn btn-primary" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

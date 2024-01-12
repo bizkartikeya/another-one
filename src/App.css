@@ -57,15 +57,6 @@ border-right: 3px solid rgb(87, 87, 87);
 }
 
 
-
-/* .inputbox {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  height:50px;
-  background-color: white;
-  padding: 10px;
-} */
 .message-input {
   display: flex;
   align-items: center;
@@ -95,7 +86,7 @@ margin: 20px;
 }
 
 .top_menu {
-  background-color: #6a6e73;
+  background-color: #042739;
   padding: 13px 0px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -105,31 +96,15 @@ margin: 20px;
 
 .top_menu .title {
   text-align: center;
-  color: #21272c;
+  color:white;
   font-size: 18px;
   margin-left: 10px;
 
 }
 
-.clearChatButton {
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 50px;
-  color: white;
-  background-color: #14212b;
-  margin: 5px;
-}
-
-.clearChatButton:hover {
-  background-color: #00aa89;
-}
 
 
-.countdown-timer {
-  font-size: 14px;
-  color: #000000;
-  margin-right: 10px;
-}
+
 
 /* messages inside the chatbox */
 /* ---------------------------------------------------------------------- */
@@ -182,28 +157,140 @@ margin: 20px;
   position: relative;
 }
 
-/* .messages .message .text_wrapper::after,
-.messages .message .text_wrapper:before {
-  top: 18px;
-  border: solid transparent;
-  content: ' ';
-  height: 0;
-  width: 0;
+.loginbody{
+    height: 100vh;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../public/wall1.png);
+    backdrop-filter: blur(5px); 
+  }
+
+.end{
+position:relative;
+left:55%
+}
+
+.box {
+ 
+  backdrop-filter: blur(20px);
+  padding: 30px 40px;
+  border-radius: 25px;
+  border: 2px solid rgba(255, 255, 255, .2);
+  background-color: transparent;
+  overflow: hidden;
+  color: black;
+  
+}
+.LoginInputBox h1{
+  text-align: center;
+  font-size: 36px;
+}
+
+.logininputholders .i{
   position: absolute;
-  pointer-events: none;
-} */
-/* 
-.messages .message .text_wrapper::after {
-  border-width: 13px;
-  margin-top: 0px;
-} */
+  right: 20px;
+  top: 50%;
+  
+}
+.LoginInputBox{
+  width: 420px;
+  color: #fff;
+  padding: 30px 40px;
+  position: relative;
+}
 
-/* .messages .message .text_wrapper::before {
-  border-width: 15px;
-  margin-top: -2px;
-} */
 
-/* bot message */
+.LoginInputBox .logininputholders{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.logininputholders .loginInputs{
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ced4da;
+  background-color: transparent;
+  color: white !important;
+  font-size: 16px;
+  padding: 20px 45px 20px 20px;
+}
+
+.loginInputs:focus {
+  border-bottom: 2px solid #007bff;
+  background-color: transparent;
+  color: white  !important;
+}
+.LoginInputBox button{
+  width: 100%;
+  height: 45px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1 );
+  font-size: 16px;
+  font-weight:600;
+}
+
+.logininputholders i{
+  position: absolute;
+  right: 25px;
+  top: 50%;
+   transform: translateY(-50%);
+   font-size: 20px;
+}
+
+.form-floating label::after{
+  background-color: transparent  !important;
+  color: white !important
+}
+.form-floating label{
+  color: white !important;
+}
+
+
+.wave {
+  opacity: .4;
+  position: absolute;
+  top: 130%;
+  left: 25%;
+  z-index: -1;
+  background: #0af;
+  width: 800px;
+  height: 800px;
+  margin-left: -250px;
+  margin-top: -250px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 8000ms infinite linear;
+}
+
+.wave.-three {
+  animation: drift 10000ms infinite linear;
+}
+
+.wave.-two {
+  animation: drift 12000ms infinite linear;
+  opacity: .1;
+  background: yellow;
+}
+
+@keyframes drift {
+  from {
+    transform: rotate(0deg);
+  }
+
+  from {
+    transform: rotate(360deg);
+  }
+}
+
 
 .messages .message.left .avatar {
   float: left;
@@ -218,11 +305,6 @@ margin: 20px;
   float: left;
 }
 
-/* .messages .message.left .text_wrapper::after,
-.messages .message.left .text_wrapper::before {
-  right: 100%;
-  border-right-color: #f3eeca;
-} */
 
 .messages .message.left .timestamp {
   color: #bba387;
@@ -244,12 +326,7 @@ margin: 20px;
   margin-right: 5px;
   float: right;
 }
-/* 
-.messages .message.right .text_wrapper::after,
-.messages .message.right .text_wrapper::before {
-  left: 100%;
-  border-left-color: #b0d4f3;
-} */
+
 
 .messages .message.right .timestamp {
   color: #1a5770;
@@ -267,17 +344,40 @@ margin: 20px;
 
 .bottom_wrapper {
   background-color: #6a6e72;
-  padding: 5px;
+ 
   display: flex;
 }
 
-.bottom_wrapper #msg_input {
-  flex-grow: 1;
-  outline-width: 0;
-  padding: 5px;
-  background-color: #6a6e72;
-  border: 1px solid #bcbdc0;
-  border-radius: 50px;
+.bottom_wrapper .inputholders{
+position: relative;
+width: 100%;
+height: 50px;
+/* margin: 30px 0; */
+}
+
+.inputholders input {
+  padding: 0px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    border-radius: 40px;
+    padding: 20px 75px 20px 20px;
+}
+.inputholders input:focus{
+background-color: transparent;
+color: white;
+outline: none;
+box-shadow: none;
+}
+.inputholders input::placeholder{
+  color: white;
+}
+
+.text_border{
+  border: 2px solid rgba(255, 255, 255, .2) !important;
 }
 
 .app_button_1 {
@@ -322,29 +422,21 @@ margin: 20px;
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.inputbox{
-border: 1px solid black;
-background-color: none;
-border-radius: 10px;
-padding: 2px;
-}
 
-#messageInput {
-  padding: 0px;
-  background-color: #6a6e72;
-  color: white;
-  border-radius: 10px;
-}
 
 input::placeholder {
   color: white;
   /* Set the placeholder color to your desired color */
 }
 
-#sendButton {
+.inputholders button {
+  position:absolute;
+
   transition: all ease 1s;
    border-radius: 70px;
-  right: 0;
+  right: 20px;
+  top:50%;
+  transform: translateY(-50%);
 
   
   

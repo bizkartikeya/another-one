@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router";
 import LoadingBar from "react-top-loading-bar";
 
-function ChatScreen() {
+function ChatScreen(props) {
+  let history = useNavigate();
   const [progress, setProgress] = useState(0);
   const [button, setButton] = useState(false);
   const BaseUrl = "http://127.0.0.1:8000/";
@@ -135,8 +137,13 @@ class="chart_image"
     console.log("message rendered to screen", getCurrentTimestamp());
   };
   useEffect(() => {
-    console.log("useEffect in ChatScreen is running");
-    showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
+    if (!localStorage.getItem("token")) {
+      history("/");
+    } else {
+      props.setNav("flex");
+      console.log("useEffect in ChatScreen is running");
+      showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
+    }
   }, []);
 
   const getMessageText = (message) => {
@@ -197,7 +204,7 @@ class="chart_image"
                     <div className="title">Hi, Ask your queries</div>
                   </div>
                   <LoadingBar
-                    color="#9bb5a9"
+                    color="#14212b"
                     progress={progress}
                     onLoaderFinished={() => setProgress(0)}
                   />
@@ -206,15 +213,12 @@ class="chart_image"
 
                   {/* input */}
                   <div className="bottom_wrapper ">
-                    <div
-                      className={`input-group ${
-                        button ? "inputbox fade-in" : ""
-                      }`}
-                    >
+                    <div className="inputholders">
                       <input
                         type="text"
-                        id="messageInput"
-                        className="border-0"
+                        className={`form-control ${
+                          inputValue ? "text_border" : ""
+                        }`}
                         placeholder="Type a message..."
                         value={inputValue}
                         onChange={handleInputChange}
@@ -223,18 +227,12 @@ class="chart_image"
                             handleSendButtonClick();
                           }
                         }}
-                        style={{
-                          outline: "none",
-                          width: "92%",
-                          boxShadow: "none !important",
-                        }}
                       />
-                      <div
+                      <button
                         className={`btn btn-outline-warning ${
                           button ? "fade-in" : "fade-out"
                         }`}
                         type="button"
-                        id="sendButton"
                         onClick={handleSendButtonClick}
                       >
                         <svg
@@ -247,7 +245,7 @@ class="chart_image"
                         >
                           <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
                         </svg>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -271,9 +269,9 @@ class="chart_image"
                         data-bs-target="#collapseOne"
                         aria-expanded="true"
                         aria-controls="collapseOne"
-                        disabled
                       >
                         <strong>Last Code Generated: </strong>
+                        <div className="end">Developer_Options</div>
                       </button>
                     </h2>
                     <div
