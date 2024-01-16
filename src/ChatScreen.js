@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import LoadingBar from "react-top-loading-bar";
 
 function ChatScreen(props) {
+  const [devVisible, setDevVisible] = useState(false);
   let history = useNavigate();
   const [progress, setProgress] = useState(0);
   const [button, setButton] = useState(false);
@@ -42,7 +43,7 @@ class="chart_image"
     } else if (args.text.includes("\n")) {
       const rows = args.text.split("\n").map((row) => row.trim().split(/\s+/));
 
-      content = `<div>
+      content = `<div class = "tabledata">
       <h2>Your Table</h2>
       <table border="1">
         <thead>
@@ -186,6 +187,10 @@ class="chart_image"
     console.log("Send button clicked", getCurrentTimestamp());
   };
 
+  const handleCheckboxChange = () => {
+    setDevVisible(!devVisible);
+  };
+
   const getCurrentTimestamp = () => new Date();
 
   return (
@@ -257,53 +262,106 @@ class="chart_image"
               <div className="chat_window">
                 <div className="top_menu">
                   <div className="title">Help</div>
+                  <div className="form-check form-switch  form-check-reverse endtoggle">
+                    <label
+                      class="form-check-label"
+                      for="flexSwitchCheckDefault"
+                      style={{ color: "white" }}
+                    >
+                      Developer Options
+                    </label>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="flexSwitchCheckDefault"
+                      onChange={handleCheckboxChange}
+                    />
+                  </div>
                 </div>
 
-                <div className="accordion" id="accordionExample">
-                  <div className="accordion-item">
-                    <h2 className="accordion-header">
+                <div className="accordion" id="accordionPanelsStayOpenExample">
+                  {devVisible && (
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button
+                          className="accordion-button"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseOne"
+                          aria-expanded="true"
+                          aria-controls="panelsStayOpen-collapseOne"
+                          disabled
+                        >
+                          <strong>Last Code Generated: </strong>
+                          <div className="end">Developer_Options</div>
+                        </button>
+                      </h2>
+                      <div
+                        id="panelsStayOpen-collapseOne"
+                        className="accordion-collapse collapse show no-wrap-div"
+                        data-bs-parent="#accordionExample"
+                        style={{ maxWidth: "auto" }}
+                      >
+                        <div
+                          className="accordion-body no-wrap-div"
+                          style={{
+                            textAlign: "left",
+                            display: `${lastGeneratedCode}`,
+                            overflow: "auto",
+                          }}
+                        >
+                          {"{"}
+                          <br></br>
+                          <strong>result:</strong> {resultValue.result}
+                        </div>
+                        <div
+                          className="accordion-body no-wrap-div"
+                          style={{
+                            textAlign: "left",
+                            display: `${lastGeneratedCode}`,
+                            overflow: "auto",
+                          }}
+                        >
+                          <strong>last_code_generated: </strong>
+                          {resultValue.last_code_generated}
+                          <br></br>
+                          {"}"}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
                       <button
-                        className="accordion-button"
+                        class="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
+                        data-bs-target="#panelsStayOpen-collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="panelsStayOpen-collapseTwo"
                       >
-                        <strong>Last Code Generated: </strong>
-                        <div className="end">Developer_Options</div>
+                        <strong> Data Frame Refernce:</strong>
                       </button>
                     </h2>
                     <div
-                      id="collapseOne"
-                      className="accordion-collapse collapse show no-wrap-div"
+                      id="panelsStayOpen-collapseTwo"
+                      class="accordion-collapse collapse"
                       data-bs-parent="#accordionExample"
-                      style={{ maxWidth: "auto" }}
                     >
-                      <div
-                        className="accordion-body no-wrap-div"
-                        style={{
-                          textAlign: "left",
-                          display: `${lastGeneratedCode}`,
-                          overflow: "auto",
-                        }}
-                      >
-                        {"{"}
-                        <br></br>
-                        <strong>result:</strong> {resultValue.result}
-                      </div>
-                      <div
-                        className="accordion-body no-wrap-div"
-                        style={{
-                          textAlign: "left",
-                          display: `${lastGeneratedCode}`,
-                          overflow: "auto",
-                        }}
-                      >
-                        <strong>last_code_generated: </strong>
-                        {resultValue.last_code_generated}
-                        <br></br>
-                        {"}"}
+                      <div class="accordion-body">
+                        <strong>
+                          Lorem ipsum, dolor sit amet consectetur adipisicing
+                          elit. Facere, neque.
+                        </strong>{" "}
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Quos, dolor eveniet? Consequuntur inventore
+                        voluptatem quo doloremque reiciendis voluptate velit
+                        cupiditate asperiores, tenetur distinctio, maiores
+                        possimus optio est vel libero repellat aut molestias
+                        error facilis natus voluptates. Dolorem soluta,
+                        provident sed doloremque aspernatur perferendis illo
+                        impedit, sequi veritatis eaque, deserunt quas!
                       </div>
                     </div>
                   </div>

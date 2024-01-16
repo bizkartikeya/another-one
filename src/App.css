@@ -92,6 +92,7 @@ margin: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .top_menu .title {
@@ -99,10 +100,23 @@ margin: 20px;
   color:white;
   font-size: 18px;
   margin-left: 10px;
+  position: relative;
 
 }
 
-
+.navbar button{
+  position: absolute;
+  right: 25px;
+  top:50%;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 40px;
+  padding: 10px 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.269);
+}
 
 
 
@@ -120,11 +134,13 @@ margin: 20px;
   min-height: 200px;
   max-height: 500px;
   overflow: scroll;
+  overflow-x: auto;
 }
 
 .messages .message {
   clear: both;
-  overflow: hidden;
+  overflow: auto;
+  overflow-x:auto;
   margin-bottom: 2px;
   transition: all 0.5s linear;
   opacity: 0;
@@ -154,7 +170,12 @@ margin: 20px;
   padding: 15px;
   /* min-width: 150px; */
   max-width: fit-content;
+  overflow-x: scroll;
   position: relative;
+}
+
+table{
+overflow-x: scroll;
 }
 
 .loginbody{
@@ -163,13 +184,23 @@ margin: 20px;
     position: relative;
     justify-content: center;
     align-items: center;
-    background-image: url(../public/wall1.png);
+    background: url(../public/wall1.png) no-repeat center center fixed;
+    background-size: cover;
     backdrop-filter: blur(5px); 
   }
+
+
+  
 
 .end{
 position:relative;
 left:55%
+}
+.endtoggle{
+position: absolute;
+top:50%;
+right:20px;
+transform: translateY(-50%);
 }
 
 .box {

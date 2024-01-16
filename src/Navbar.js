@@ -16,6 +16,7 @@ function Navbar(props) {
         display: `${props.nav || "none"}`,
         alignItems: "center",
         justifyContent: "center",
+        position: "relative",
       }}
     >
       <div style={{ textAlign: "center" }}>
