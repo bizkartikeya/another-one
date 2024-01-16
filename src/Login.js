@@ -13,11 +13,15 @@ function Login(props) {
 
   const handleLogin = () => {
     if (inputEmailValue === "" || inputPasswordValue === "") {
+      console.log("email is: ", inputEmailValue);
+      console.log("password is: ", inputPasswordValue);
       alert("Please fill all the fields");
       return;
     }
     if (!isValidEmail) {
       alert("Please enter a valid email");
+      console.log("email is: ", inputEmailValue);
+      console.log("password is: ", inputPasswordValue);
       return;
     } else {
       localStorage.setItem("token", inputEmailValue);
@@ -36,10 +40,10 @@ function Login(props) {
 
   return (
     <div className="loginbody">
-      <div class="box">
-        <div class="wave -one"></div>
-        <div class="wave -two"></div>
-        <div class="wave -three"></div>
+      <div className="box">
+        <div className="wave -one"></div>
+        <div className="wave -two"></div>
+        <div className="wave -three"></div>
         <div className="LoginInputBox">
           <h1>Login</h1>
           <div className="logininputholders">
@@ -53,9 +57,9 @@ function Login(props) {
                 onChange={handleEmailOnChange}
                 required
               />
-              <label for="loginID">Email address</label>
+              <label htmlFor="loginID">Email address</label>
             </div>
-            <i class="bx bxs-user"></i>
+            <i className="bx bxs-user"></i>
           </div>
           <div className="logininputholders">
             <div className="form-floating">
@@ -68,9 +72,9 @@ function Login(props) {
                 onChange={handlePasswordOnChange}
                 required
               />
-              <label for="floatingPassword">Password</label>
+              <label htmlFor="floatingPassword">Password</label>
             </div>
-            <i class="bx bxs-lock-alt"></i>
+            <i className="bx bxs-lock-alt"></i>
           </div>
 
           <button className="btn btn-primary" onClick={handleLogin}>
