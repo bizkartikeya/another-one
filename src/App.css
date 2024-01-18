@@ -190,8 +190,25 @@ overflow-x: scroll;
   }
 
 
-  
+  .dfTable{
+    overflow: auto;
+    overflow-x: auto;
+  }
 
+  .borderedtable{
+    border-collapse: collapse;
+      width: 100%;
+  }
+
+    .borderedtable th,
+    .borderedtable td {
+      border: 1px solid #ddd;
+      /* Border color */
+      padding: 8px;
+      /* Padding inside cells */
+      text-align: left;
+      /* Text alignment in cells */
+    }
 .end{
 position:relative;
 left:55%

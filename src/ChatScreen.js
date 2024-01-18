@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import LoadingBar from "react-top-loading-bar";
+import DataTable from "./DataTable";
 
 function ChatScreen(props) {
   const [devVisible, setDevVisible] = useState(false);
   let history = useNavigate();
   const [progress, setProgress] = useState(0);
+  const [referenceDf, setReferenceDf] = useState(null);
+  const [referenceDfFlag, setReferenceDfFlag] = useState(false);
   const [button, setButton] = useState(false);
   const BaseUrl = "http://127.0.0.1:8000/";
   const [inputValue, setInputValue] = useState("");
@@ -121,6 +124,9 @@ class="chart_image"
       setLastGeneratedCode("block");
       setResultValue(data);
     }
+    setReferenceDfFlag(true);
+    setReferenceDf(data.dataframe.Acount);
+    console.log("wfdkw:  ", data.dataframe.Acount);
   };
 
   const showUserMessage = (endpoint, message, datetime) => {
@@ -344,26 +350,19 @@ class="chart_image"
                         <strong> Data Frame Refernce:</strong>
                       </button>
                     </h2>
-                    <div
-                      id="panelsStayOpen-collapseTwo"
-                      className="accordion-collapse collapse"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div className="accordion-body">
-                        <strong>
-                          Lorem ipsum, dolor sit amet consectetur adipisicing
-                          elit. Facere, neque.
-                        </strong>{" "}
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Quos, dolor eveniet? Consequuntur inventore
-                        voluptatem quo doloremque reiciendis voluptate velit
-                        cupiditate asperiores, tenetur distinctio, maiores
-                        possimus optio est vel libero repellat aut molestias
-                        error facilis natus voluptates. Dolorem soluta,
-                        provident sed doloremque aspernatur perferendis illo
-                        impedit, sequi veritatis eaque, deserunt quas!
+                    {referenceDfFlag && (
+                      <div
+                        id="panelsStayOpen-collapseTwo"
+                        className="accordion-collapse collapse"
+                        data-bs-parent="#accordionExample"
+                      >
+                        <div className="accordion-body">
+                          <div className="dfTable">
+                            <DataTable data={referenceDf} />
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
