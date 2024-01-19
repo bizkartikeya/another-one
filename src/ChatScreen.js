@@ -7,7 +7,7 @@ function ChatScreen(props) {
   const [devVisible, setDevVisible] = useState(false);
   let history = useNavigate();
   const [progress, setProgress] = useState(0);
-  const [referenceDf, setReferenceDf] = useState(null);
+  const [referenceDf, setReferenceDf] = useState();
   const [referenceDfFlag, setReferenceDfFlag] = useState(false);
   const [button, setButton] = useState(false);
   const BaseUrl = "http://127.0.0.1:8000/";
@@ -125,8 +125,11 @@ class="chart_image"
       setResultValue(data);
     }
     setReferenceDfFlag(true);
-    setReferenceDf(data.dataframe.Acount);
-    console.log("wfdkw:  ", data.dataframe.Acount);
+    const tabledf = Object.entries(data.dataframe);
+    console.log("ye hai tableDF", tabledf);
+    setReferenceDf(tabledf);
+    console.log("Refence Df m ye aya hai yrr::", referenceDf);
+    console.log("wfdkw:  ", Object.entries(data.dataframe));
   };
 
   const showUserMessage = (endpoint, message, datetime) => {
@@ -340,12 +343,13 @@ class="chart_image"
                   <div className="accordion-item">
                     <h2 className="accordion-header">
                       <button
-                        className="accordion-button collapsed"
+                        className="accordion-button"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#panelsStayOpen-collapseTwo"
                         aria-expanded="false"
                         aria-controls="panelsStayOpen-collapseTwo"
+                        disabled
                       >
                         <strong> Data Frame Refernce:</strong>
                       </button>
@@ -353,12 +357,12 @@ class="chart_image"
                     {referenceDfFlag && (
                       <div
                         id="panelsStayOpen-collapseTwo"
-                        className="accordion-collapse collapse"
+                        className="accordion-collapse show collapse"
                         data-bs-parent="#accordionExample"
                       >
                         <div className="accordion-body">
                           <div className="dfTable">
-                            <DataTable data={referenceDf} />
+                            <DataTable dictionaries={referenceDf} />
                           </div>
                         </div>
                       </div>
