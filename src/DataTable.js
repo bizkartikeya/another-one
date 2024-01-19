@@ -15,7 +15,11 @@ const DataTable = ({ dictionaries }) => {
   return (
     <div>
       {Object.keys(dictionaries).map((dictIndex, index) => (
-        <button key={index} onClick={() => handleButtonClick(dictIndex)}>
+        <button
+          key={index}
+          className="btn btn btn-outline-primary mx-2"
+          onClick={() => handleButtonClick(dictIndex)}
+        >
           {dictionaries[dictIndex][0]}
         </button>
       ))}

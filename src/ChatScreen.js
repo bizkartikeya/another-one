@@ -290,6 +290,34 @@ class="chart_image"
                 </div>
 
                 <div className="accordion" id="accordionPanelsStayOpenExample">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header">
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="panelsStayOpen-collapseTwo"
+                        disabled
+                      >
+                        <strong> Data Frame Refernce:</strong>
+                      </button>
+                    </h2>
+                    {referenceDfFlag && (
+                      <div
+                        id="panelsStayOpen-collapseTwo"
+                        className="accordion-collapse show collapse"
+                        data-bs-parent="#accordionExample"
+                      >
+                        <div className="accordion-body">
+                          <div className="dfTable">
+                            <DataTable dictionaries={referenceDf} />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   {devVisible && (
                     <div className="accordion-item">
                       <h2 className="accordion-header">
@@ -340,34 +368,6 @@ class="chart_image"
                       </div>
                     </div>
                   )}
-                  <div className="accordion-item">
-                    <h2 className="accordion-header">
-                      <button
-                        className="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="panelsStayOpen-collapseTwo"
-                        disabled
-                      >
-                        <strong> Data Frame Refernce:</strong>
-                      </button>
-                    </h2>
-                    {referenceDfFlag && (
-                      <div
-                        id="panelsStayOpen-collapseTwo"
-                        className="accordion-collapse show collapse"
-                        data-bs-parent="#accordionExample"
-                      >
-                        <div className="accordion-body">
-                          <div className="dfTable">
-                            <DataTable dictionaries={referenceDf} />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
                 </div>
               </div>
             </div>
