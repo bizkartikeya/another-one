@@ -43,8 +43,8 @@ function Login(props) {
         alert("Invalid credentials");
       } else if (response.status === 200) {
         alert("Login Success");
-        // localStorage.setItem("token", inputEmailValue);
-        // history("/main");
+        localStorage.setItem("token", inputEmailValue);
+        history("/main");
       }
     }
   };
