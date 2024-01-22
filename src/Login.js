@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 
 function Login(props) {
   let history = useNavigate();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const BaseUrl = "http://127.0.0.1:8000/";
   const [inputEmailValue, setInputEmailValue] = useState("");
   const [inputPasswordValue, setInputPasswordValue] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -11,7 +13,8 @@ function Login(props) {
     props.setNav("none");
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    console.log("submit button:::", credentials);
     if (inputEmailValue === "" || inputPasswordValue === "") {
       console.log("email is: ", inputEmailValue);
       console.log("password is: ", inputPasswordValue);
@@ -24,17 +27,36 @@ function Login(props) {
       console.log("password is: ", inputPasswordValue);
       return;
     } else {
-      localStorage.setItem("token", inputEmailValue);
-      history("/main");
+      const response = await fetch(BaseUrl + "login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+      console.log("I am from Login:::", response);
+      if (response.status === 400) {
+        alert("Invalid credentials");
+      } else if (response.status === 200) {
+        alert("Login Success");
+        // localStorage.setItem("token", inputEmailValue);
+        // history("/main");
+      }
     }
   };
 
   const handleEmailOnChange = (e) => {
     setInputEmailValue(e.target.value);
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     setIsValidEmail(emailRegex.test(inputEmailValue));
   };
   const handlePasswordOnChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
     setInputPasswordValue(e.target.value);
   };
 
@@ -51,6 +73,7 @@ function Login(props) {
               <input
                 type="email"
                 id="loginID"
+                name="email"
                 value={inputEmailValue}
                 className="form-control loginInputs"
                 placeholder="name@example.com"
@@ -65,6 +88,7 @@ function Login(props) {
             <div className="form-floating">
               <input
                 type="password"
+                name="password"
                 value={inputPasswordValue}
                 className="form-control loginInputs"
                 id="floatingPassword"
