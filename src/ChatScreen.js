@@ -111,7 +111,13 @@ class="chart_image"
     setProgress(100);
     if (data.base64_image) {
       const chart = "data:image/png;base64," + data.base64_image;
-      setLastGeneratedCode(data.last_code_generated);
+      setReferenceDfFlag(true);
+      const tabledf = Object.entries(data.image_path.dataframe);
+      console.log("ye hai tableDF", tabledf);
+      setReferenceDf(tabledf);
+      console.log("Refence Df m ye aya hai yrr::", referenceDf);
+      console.log("wfdkw:  ", Object.entries(data.image_path.dataframe));
+      setLastGeneratedCode(data.image_path.last_code_generated);
       setResultValue({
         result: data.image_path.result,
         last_code_generated: data.image_path.last_code_generated,
@@ -123,13 +129,13 @@ class="chart_image"
       setLastGeneratedCode(data.last_code_generated);
       setLastGeneratedCode("block");
       setResultValue(data);
+      setReferenceDfFlag(true);
+      const tabledf = Object.entries(data.dataframe);
+      console.log("ye hai tableDF", tabledf);
+      setReferenceDf(tabledf);
+      console.log("Refence Df m ye aya hai yrr::", referenceDf);
+      console.log("wfdkw:  ", Object.entries(data.dataframe));
     }
-    setReferenceDfFlag(true);
-    const tabledf = Object.entries(data.dataframe);
-    console.log("ye hai tableDF", tabledf);
-    setReferenceDf(tabledf);
-    console.log("Refence Df m ye aya hai yrr::", referenceDf);
-    console.log("wfdkw:  ", Object.entries(data.dataframe));
   };
 
   const showUserMessage = (endpoint, message, datetime) => {
