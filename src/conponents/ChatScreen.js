@@ -38,7 +38,7 @@ function ChatScreen(props) {
     if (args.text.includes("png")) {
       setChartExportImage(args.text);
       console.log("Image Path:", chartExportImage);
-      setChartExport(true);
+      handleCheckboxChangeChart();
       content = `<div class="chart">
       
         <img
@@ -52,8 +52,8 @@ class="chart_image"
       const rows = args.text.split("\n").map((row) => row.trim().split(/\s+/));
       setChartExport(false);
       content = `<div class = "tabledata">
-      <h2>Your Table</h2>
-      <table border="1">
+      
+      <table class="borderedtable" border="1">
         <thead>
           <tr>
             ${rows[0].map((header, index) => `<th key=${index}>${header}</th>`)}
@@ -349,6 +349,7 @@ class="chart_image"
                         type="checkbox"
                         role="switch"
                         id="flexSwitchCheckDefault"
+                        checked={chartExport}
                         onChange={handleCheckboxChangeChart}
                       />
                     </div>
@@ -366,7 +367,6 @@ class="chart_image"
                           data-bs-target="#panelsStayOpen-collapseOne"
                           aria-expanded="true"
                           aria-controls="panelsStayOpen-collapseOne"
-                          disabled
                         >
                           <strong>Last Code Generated: </strong>
                           <div className="end">Developer_Options</div>
@@ -415,7 +415,6 @@ class="chart_image"
                         data-bs-target="#panelsStayOpen-collapseTwo"
                         aria-expanded="false"
                         aria-controls="panelsStayOpen-collapseTwo"
-                        disabled
                       >
                         <strong> Data Frame Refernce:</strong>
                       </button>
