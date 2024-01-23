@@ -399,7 +399,15 @@ class="chart_image"
                           }}
                         >
                           <strong>last_code_generated: </strong>
-                          {resultValue.last_code_generated}
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: resultValue.last_code_generated.replace(
+                                /\n/g,
+                                "<br />"
+                              ),
+                            }}
+                          />
+
                           <br></br>
                           {"}"}
                         </div>
