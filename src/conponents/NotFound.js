@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 const NotFound = () => {
   const history = useNavigate();
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(10);
 
   useEffect(() => {
     const interval = setInterval(() => {
