@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import Streamlite from "./conponents/Streamlite";
 import ConsoleMenu from "./conponents/ConsoleMenu";
+import NotFound from "./conponents/NotFound";
 
 function App() {
   const [nav, setNav] = useState("none");
@@ -37,7 +38,7 @@ function App() {
             path="/StreamliteBot"
             element={<Streamlite setNav={setNav} setNavText={setNavText} />}
           />
-          <Route></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>

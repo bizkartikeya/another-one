@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const Streamlite = (props) => {
+  let history = useNavigate();
   useEffect(() => {
-    props.setNav("flex");
-    props.setNavText("Streamlit Bot");
+    if (!localStorage.getItem("token")) {
+      history("/");
+    } else {
+      props.setNav("flex");
+      props.setNavText("Streamlit Bot");
+    }
   }, []);
 
   return (

@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import projectsData from "../projects.json"; // Import your JSON data
 
 const ConsoleMenu = (props) => {
+  let history = useNavigate();
   useEffect(() => {
-    props.setNav("flex");
-    props.setNavText("Bots Menu");
+    if (!localStorage.getItem("token")) {
+      history("/");
+    } else {
+      props.setNav("flex");
+      props.setNavText("Bots Menu");
+    }
   }, []);
 
   return (
