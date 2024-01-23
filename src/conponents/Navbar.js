@@ -1,24 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function Navbar(props) {
+  const [dataBot, setDataBot] = useState("");
+  const [strBot, setStrBot] = useState("");
   let history = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
     history("/");
   };
+  const handleDataBot = () => {
+    setStrBot("");
+    setDataBot("activated");
+  };
+  const handleStrBot = () => {
+    setStrBot("activatedstream");
+    setDataBot("");
+  };
+
   return (
-    <div
-      className="navbar navbar-expand-lg sticky-top"
+    <nav
+      className="navbar sticky-top"
       style={{
         background: "#9bb5a9",
         backdropFilter: "blur(20px)",
         display: `${props.nav || "none"}`,
         alignItems: "center",
         justifyContent: "center",
-        position: "relative",
+        // position: "relative",
       }}
     >
+      <div>
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0 menulist">
+          <li className={`nav-item ${dataBot}`} onClick={handleDataBot}>
+            <Link className="nav-link hlink" aria-current="page" to="/home">
+              <i class="bx bxs-grid"></i>
+            </Link>
+          </li>
+        </ul>
+      </div>
       <div style={{ textAlign: "center" }}>
         <a
           className="navbar-brand"
@@ -41,13 +62,13 @@ function Navbar(props) {
             }}
             alt="logo"
           />
-          <span>BizMetric Structured Data Analyser-BOT</span>
+          <span>BizMetric - {props.navText}</span>
         </a>
       </div>
       <button className="btn btn-primary" onClick={handleLogout}>
         Logout
       </button>
-    </div>
+    </nav>
   );
 }
 

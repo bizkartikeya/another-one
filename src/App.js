@@ -1,7 +1,7 @@
 import "./App.css";
-import Navbar from "./Navbar";
-import ChatScreen from "./ChatScreen";
-import Login from "./Login";
+import Navbar from "./conponents/Navbar";
+import ChatScreen from "./conponents/ChatScreen";
+import Login from "./conponents/Login";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,16 +10,33 @@ import {
   Routes,
 } from "react-router-dom";
 import { useState } from "react";
+import Streamlite from "./conponents/Streamlite";
+import ConsoleMenu from "./conponents/ConsoleMenu";
 
 function App() {
   const [nav, setNav] = useState("none");
+  const [navText, setNavText] = useState("none");
   return (
     <>
       <Router>
-        <Navbar nav={nav} />
+        <Navbar nav={nav} navText={navText} />
         <Routes>
-          <Route path="/" element={<Login setNav={setNav} />} />
-          <Route path="/main" element={<ChatScreen setNav={setNav} />} />
+          <Route
+            path="/home"
+            element={<ConsoleMenu setNav={setNav} setNavText={setNavText} />}
+          />
+          <Route
+            path="/"
+            element={<Login setNav={setNav} setNavText={setNavText} />}
+          />
+          <Route
+            path="/DataAnalysisBot"
+            element={<ChatScreen setNav={setNav} setNavText={setNavText} />}
+          />
+          <Route
+            path="/StreamliteBot"
+            element={<Streamlite setNav={setNav} setNavText={setNavText} />}
+          />
           <Route></Route>
         </Routes>
       </Router>

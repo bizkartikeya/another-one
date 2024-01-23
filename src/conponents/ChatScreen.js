@@ -5,6 +5,8 @@ import DataTable from "./DataTable";
 
 function ChatScreen(props) {
   const [devVisible, setDevVisible] = useState(false);
+  const [chartExport, setChartExport] = useState(false);
+  const [chartExportImage, setChartExportImage] = useState("");
   let history = useNavigate();
   const [progress, setProgress] = useState(0);
   const [referenceDf, setReferenceDf] = useState();
@@ -34,6 +36,9 @@ function ChatScreen(props) {
 
     let content;
     if (args.text.includes("png")) {
+      setChartExportImage(args.text);
+      console.log("Image Path:", chartExportImage);
+      setChartExport(true);
       content = `<div class="chart">
       
         <img
@@ -45,7 +50,7 @@ class="chart_image"
       </div>`;
     } else if (args.text.includes("\n")) {
       const rows = args.text.split("\n").map((row) => row.trim().split(/\s+/));
-
+      setChartExport(false);
       content = `<div class = "tabledata">
       <h2>Your Table</h2>
       <table border="1">
@@ -67,6 +72,7 @@ class="chart_image"
       </table>
     </div>`;
     } else {
+      setChartExport(false);
       content = `<div class="text">${args.text}</div>`;
     }
 
@@ -138,6 +144,33 @@ class="chart_image"
     }
   };
 
+  const handleClearChat = async () => {
+    const endpoint = "clear-cache/";
+    const url = BaseUrl + endpoint;
+    console.log(url);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("clear chat::", response);
+    setInputValue("");
+    setButton("none");
+    const message = document.querySelector(".messages");
+    message.innerHTML = "";
+    showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
+    console.log("Send button clicked", getCurrentTimestamp());
+    setLastGeneratedCode("none");
+    setResultValue({
+      result: "",
+      last_code_generated: "",
+    });
+    setReferenceDfFlag(false);
+    setReferenceDf();
+    console.log("Clear Chat button clicked", getCurrentTimestamp());
+  };
+
   const showUserMessage = (endpoint, message, datetime) => {
     sendtoAPI(endpoint, message);
     console.log(
@@ -157,6 +190,7 @@ class="chart_image"
       history("/");
     } else {
       props.setNav("flex");
+      props.setNavText("Strctured Data Analysis Bot");
       console.log("useEffect in ChatScreen is running");
       showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
     }
@@ -205,6 +239,9 @@ class="chart_image"
   const handleCheckboxChange = () => {
     setDevVisible(!devVisible);
   };
+  const handleCheckboxChangeChart = () => {
+    setChartExport(!chartExport);
+  };
 
   const getCurrentTimestamp = () => new Date();
 
@@ -222,6 +259,12 @@ class="chart_image"
                 <div className="window">
                   <div className="top_menu">
                     <div className="title">Hi, Ask your queries</div>
+                    <button
+                      className="btn btn-outline-primary mx-2"
+                      onClick={handleClearChat}
+                    >
+                      clear chat
+                    </button>
                   </div>
                   <LoadingBar
                     color="#14212b"
@@ -271,59 +314,48 @@ class="chart_image"
                 </div>
               </div>
             </div>
-
             {/* left side content */}
             <div className="col-md-6">
               <div className="chat_window">
                 <div className="top_menu">
                   <div className="title">Help</div>
-                  <div className="form-check form-switch  form-check-reverse endtoggle">
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                      style={{ color: "white" }}
-                    >
-                      Developer Options
-                    </label>
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      role="switch"
-                      id="flexSwitchCheckDefault"
-                      onChange={handleCheckboxChange}
-                    />
+                  <div className="radios">
+                    <div className="form-check form-switch  form-check-reverse ">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexSwitchCheckDefault"
+                        style={{ color: "white" }}
+                      >
+                        Developer Options
+                      </label>
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        id="flexSwitchCheckDefault"
+                        onChange={handleCheckboxChange}
+                      />
+                    </div>
+                    <div className="form-check form-switch  form-check-reverse ">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexSwitchCheckDefault"
+                        style={{ color: "white" }}
+                      >
+                        Display Chart
+                      </label>
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        id="flexSwitchCheckDefault"
+                        onChange={handleCheckboxChangeChart}
+                      />
+                    </div>
                   </div>
                 </div>
 
                 <div className="accordion" id="accordionPanelsStayOpenExample">
-                  <div className="accordion-item">
-                    <h2 className="accordion-header">
-                      <button
-                        className="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="panelsStayOpen-collapseTwo"
-                        disabled
-                      >
-                        <strong> Data Frame Refernce:</strong>
-                      </button>
-                    </h2>
-                    {referenceDfFlag && (
-                      <div
-                        id="panelsStayOpen-collapseTwo"
-                        className="accordion-collapse show collapse"
-                        data-bs-parent="#accordionExample"
-                      >
-                        <div className="accordion-body">
-                          <div className="dfTable">
-                            <DataTable dictionaries={referenceDf} />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
                   {devVisible && (
                     <div className="accordion-item">
                       <h2 className="accordion-header">
@@ -370,6 +402,73 @@ class="chart_image"
                           {resultValue.last_code_generated}
                           <br></br>
                           {"}"}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <div className="accordion-item">
+                    <h2 className="accordion-header">
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="panelsStayOpen-collapseTwo"
+                        disabled
+                      >
+                        <strong> Data Frame Refernce:</strong>
+                      </button>
+                    </h2>
+                    {referenceDfFlag && (
+                      <div
+                        id="panelsStayOpen-collapseTwo"
+                        className="accordion-collapse show collapse"
+                        data-bs-parent="#accordionExample"
+                      >
+                        <div className="accordion-body">
+                          <div className="dfTable">
+                            <DataTable dictionaries={referenceDf} />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {chartExport && (
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button
+                          className="accordion-button"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseOne"
+                          aria-expanded="true"
+                          aria-controls="panelsStayOpen-collapseOne"
+                          disabled
+                        >
+                          <strong>Chart Image: </strong>
+                        </button>
+                      </h2>
+                      <div
+                        id="panelsStayOpen-collapseOne"
+                        className="accordion-collapse collapse show no-wrap-div"
+                        data-bs-parent="#accordionExample"
+                        style={{ maxWidth: "auto" }}
+                      >
+                        <div
+                          className="accordion-body no-wrap-div"
+                          style={{
+                            textAlign: "left",
+                            overflow: "auto",
+                          }}
+                        >
+                          {console.log("from div", chartExportImage)}
+                          {chartExportImage !== "" ? (
+                            <img src={chartExportImage} alt="" />
+                          ) : (
+                            <div>No chart to display</div>
+                          )}
                         </div>
                       </div>
                     </div>

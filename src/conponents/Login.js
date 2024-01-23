@@ -42,9 +42,9 @@ function Login(props) {
       if (response.status === 400) {
         alert("Invalid credentials");
       } else if (response.status === 200) {
-        alert("Login Success");
+        // alert("Login Success");
         localStorage.setItem("token", inputEmailValue);
-        history("/main");
+        history("/home");
       }
     }
   };
