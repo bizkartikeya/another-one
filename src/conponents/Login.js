@@ -27,27 +27,26 @@ function Login(props) {
       console.log("password is: ", inputPasswordValue);
       return;
     } else {
-      localStorage.setItem("token", inputEmailValue);
-      history("/home");
-      // const response = await fetch(BaseUrl + "login", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
+      // localStorage.setItem("token", inputEmailValue);
+      // history("/home");
+      const response = await fetch(BaseUrl + "login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      //   body: JSON.stringify({
-      //     email: credentials.email,
-      //     password: credentials.password,
-      //   }),
-      // });
-      // console.log("I am from Login:::", response);
-      // if (response.status === 400) {
-      //   alert("Invalid credentials");
-      // } else if (response.status === 200) {
-      //   // alert("Login Success");
-      //   localStorage.setItem("token", inputEmailValue);
-      //   history("/home");
-      // }
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+      console.log("I am from Login:::", response);
+      if (response.ok) {
+        localStorage.setItem("token", inputEmailValue);
+        history("/home");
+      } else {
+        alert("Login credentials incorrect");
+      }
     }
   };
 
