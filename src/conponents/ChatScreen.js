@@ -329,7 +329,7 @@ class="chart_image"
                         Developer Options
                       </label>
                       <input
-                        className="form-check-input"
+                        className="form-check-input mx-1"
                         type="checkbox"
                         role="switch"
                         id="flexSwitchCheckDefault"
@@ -345,7 +345,7 @@ class="chart_image"
                         Display Chart
                       </label>
                       <input
-                        className="form-check-input"
+                        className="form-check-input mx-1"
                         type="checkbox"
                         role="switch"
                         id="flexSwitchCheckDefault"
@@ -449,25 +449,24 @@ class="chart_image"
                           className="accordion-button"
                           type="button"
                           data-bs-toggle="collapse"
-                          data-bs-target="#panelsStayOpen-collapseOne"
+                          data-bs-target="#panelsStayOpen-collapseThree"
                           aria-expanded="true"
-                          aria-controls="panelsStayOpen-collapseOne"
-                          disabled
+                          aria-controls="panelsStayOpen-collapseThree"
                         >
                           <strong>Chart Image: </strong>
                         </button>
                       </h2>
                       <div
-                        id="panelsStayOpen-collapseOne"
+                        id="panelsStayOpen-collapseThree"
                         className="accordion-collapse collapse show no-wrap-div"
                         data-bs-parent="#accordionExample"
                         style={{ maxWidth: "auto" }}
                       >
                         <div
-                          className="accordion-body no-wrap-div"
+                          className="accordion-body chartImageDisplay"
                           style={{
                             textAlign: "left",
-                            overflow: "auto",
+                            height: "max-content",
                           }}
                         >
                           {console.log("from div", chartExportImage)}

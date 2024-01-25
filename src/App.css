@@ -225,12 +225,17 @@ color: white !important;
   display: flex;
   -webkit-box-align: stretch;
     align-items: stretch;
-    gap: 15px;
+    gap: 25px;
     padding-bottom: 5px;
     flex-wrap: wrap;
 }
 .menucontainer{
 margin:10px 70px 70px 70px
+}
+
+.chartImageDisplay{
+  height: 250px;
+  width: 250px;
 }
 .menucards{
   text-decoration: none;
@@ -238,9 +243,10 @@ margin:10px 70px 70px 70px
   border: none;
   background-color: #cee0fd;
   color: black;
-    box-shadow: 10px 10px 10px -1px rgba(10, 99, 169, 0.16), -10px -10px 10px -1px rgba(255, 255, 255, 0.70);
-    transition: box-shadow 0.3s ease-in-out;
-    transition: color 0.7s ease-in-out;
+    border-radius: 25px;
+      background: #cfe1fe;
+      box-shadow: -7px -7px 22px #b2c2da,
+        7px 7px 22px #ecffff;
   
     &:hover {
       color:#6a6e72;

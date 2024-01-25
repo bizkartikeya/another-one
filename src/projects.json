@@ -8,12 +8,12 @@
         "title":"Streamlite Bot",
         "description":"A bot to get analysed information from PDF and get the answers via external txt file",
         "link":"/StreamliteBot",
-        "icon":"pdf.jpg"
+        "icon":"pdf.png"
     },{
         "title":"Streamlit Bot",
         "description":"A bot to get weather information",
         "link":"/StreamlitBot",
-        "icon":"pdf.jpg"
+        "icon":"pdf.png"
     }
     
 ]

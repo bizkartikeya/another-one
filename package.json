@@ -22,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+     "both": "concurrently \"npm run start\" \"uvicorn backend/Main:app --reload;\""
   },
   "eslintConfig": {
     "extends": [
