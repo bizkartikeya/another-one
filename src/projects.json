@@ -1,18 +1,18 @@
 {
     "botdetails":[{
-        "title":"Data Analysis Bot",
+        "title":"DataBase Analysis Bot",
         "description":"A bot to analyze structured data in an interactive chat-bot format",
         "link":"/DataAnalysisBot",
         "icon":"data.png"
     },{
-        "title":"Streamlite Bot",
+        "title":"Document Processing Bot",
         "description":"A bot to get analysed information from PDF and get the answers via external txt file",
         "link":"/StreamliteBot",
         "icon":"pdf.png"
     },{
-        "title":"Streamlit Bot",
+        "title":"API Based Bot",
         "description":"A bot to get weather information",
-        "link":"/StreamlitBot",
+        "link":"/ApiBot",
         "icon":"pdf.png"
     }
     

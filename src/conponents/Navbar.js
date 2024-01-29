@@ -20,55 +20,58 @@ function Navbar(props) {
   };
 
   return (
-    <nav
-      className="navbar sticky-top"
-      style={{
-        background: "#9bb5a9",
-        backdropFilter: "blur(20px)",
-        display: `${props.nav || "none"}`,
-        alignItems: "center",
-        justifyContent: "center",
-        // position: "relative",
-      }}
-    >
-      <div>
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0 menulist">
-          <li className={`nav-item ${dataBot}`} onClick={handleDataBot}>
-            <Link className="nav-link hlink" aria-current="page" to="/home">
-              <i class="bx bxs-grid"></i>
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <a
-          className="navbar-brand"
-          href="#"
+    <>
+      {props.nav && (
+        <nav
+          className="navbar sticky-top"
           style={{
-            color: "white",
-            display: "flex",
+            background: "#9bb5a9",
+            backdropFilter: "blur(20px)",
             alignItems: "center",
             justifyContent: "center",
+            // position: "relative",
           }}
         >
-          <img
-            src="logo.png"
-            className=""
-            style={{
-              height: "50px",
-              width: "50px",
-              marginRight: "10px",
-              borderRight: "3px solid rgb(87, 87, 87)",
-            }}
-            alt="logo"
-          />
-          <span>BizMetric - {props.navText}</span>
-        </a>
-      </div>
-      <button className="btn btn-primary" onClick={handleLogout}>
-        Logout
-      </button>
-    </nav>
+          <div>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 menulist">
+              <li className={`nav-item ${dataBot}`} onClick={handleDataBot}>
+                <Link className="nav-link hlink" aria-current="page" to="/home">
+                  <i class="bx bxs-grid"></i>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <a
+              className="navbar-brand"
+              href="#"
+              style={{
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src="logo.png"
+                className=""
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  marginRight: "10px",
+                  borderRight: "3px solid rgb(87, 87, 87)",
+                }}
+                alt="logo"
+              />
+              <span>BizMetric - {props.navText}</span>
+            </a>
+          </div>
+          <button className="btn btn-primary" onClick={handleLogout}>
+            Logout
+          </button>
+        </nav>
+      )}
+    </>
   );
 }
 

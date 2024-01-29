@@ -10,7 +10,7 @@ function Login(props) {
   const [isValidEmail, setIsValidEmail] = useState(true);
 
   useEffect(() => {
-    props.setNav("none");
+    props.setNav(false);
   }, []);
 
   const handleLogin = async () => {
@@ -43,6 +43,7 @@ function Login(props) {
       console.log("I am from Login:::", response);
       if (response.ok) {
         localStorage.setItem("token", inputEmailValue);
+        props.setNav(true);
         history("/home");
       } else {
         alert("Login credentials incorrect");

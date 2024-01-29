@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
+import projectsData from "../projects.json"; // Import your JSON data
 
 const Streamlite = (props) => {
   let history = useNavigate();
@@ -7,8 +8,7 @@ const Streamlite = (props) => {
     if (!localStorage.getItem("token")) {
       history("/");
     } else {
-      props.setNav("flex");
-      props.setNavText("Streamlit Bot");
+      props.setNavText(projectsData.botdetails[1].title);
     }
   }, []);
 

@@ -9,7 +9,6 @@ const ConsoleMenu = (props) => {
     if (!localStorage.getItem("token")) {
       history("/");
     } else {
-      props.setNav("flex");
       props.setNavText("Bots Menu");
     }
   }, []);

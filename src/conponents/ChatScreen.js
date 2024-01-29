@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import LoadingBar from "react-top-loading-bar";
 import DataTable from "./DataTable";
+import projectsData from "../projects.json";
 
 function ChatScreen(props) {
   const [devVisible, setDevVisible] = useState(false);
@@ -189,8 +190,7 @@ class="chart_image"
     if (!localStorage.getItem("token")) {
       history("/");
     } else {
-      props.setNav("flex");
-      props.setNavText("Strctured Data Analysis Bot");
+      props.setNavText(projectsData.botdetails[0].title);
       console.log("useEffect in ChatScreen is running");
       showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
     }

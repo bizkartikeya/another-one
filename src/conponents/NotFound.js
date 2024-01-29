@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-const NotFound = () => {
+const NotFound = (props) => {
   const history = useNavigate();
   const [timer, setTimer] = useState(10);
 
   useEffect(() => {
+    props.setNav(false);
     const interval = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);
     }, 1000);
@@ -13,6 +14,7 @@ const NotFound = () => {
     // Redirect to /home after 10 seconds
     setTimeout(() => {
       clearInterval(interval);
+      props.setNav(true);
       history("/home");
     }, 10000);
 
@@ -71,7 +73,7 @@ const NotFound = () => {
             <div className="nottext">404</div>
           </div>
 
-          {/* <img src="404.png" alt="" /> */}
+          <img src="404.png" alt="" />
         </div>
       </div>
     </div>

@@ -133,6 +133,7 @@ margin: 20px;
   padding-bottom: 5px;
   min-height: 200px;
   max-height: 500px;
+  resize: vertical;
   /* overflow: scroll; */
   overflow-x: auto;
 }
