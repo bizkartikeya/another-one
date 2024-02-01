@@ -45,12 +45,12 @@ const ApiBot = (props) => {
   console.log("Bottt", data);
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      history("/");
-    } else {
-      props.setNavText(projectsData.botdetails[2].title);
-      showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
-    }
+    props.setNavText(projectsData.botdetails[2].title);
+    // if (!localStorage.getItem("token")) {
+    //   history("/");
+    // } else {
+    //   showBotMessage("Hi, Ask your queries", getCurrentTimestamp());
+    // }
   }, []);
 
   const handleInputChange = (e) => {
@@ -75,17 +75,6 @@ const ApiBot = (props) => {
     );
     const messagesContainer = document.querySelector(".messages");
     const message = document.createElement("li");
-    message.className = `message ${args.message_side}`;
-
-    message.innerHTML = `
-    <div class="avatar"></div>
-    <div class="text_wrapper">
-      <div class="text">${args.text}</div>
-      <div class="timestamp">${displayDate}</div>
-    </div>
-  `;
-
-    messagesContainer.appendChild(message);
 
     setTimeout(() => {
       message.classList.add("appeared");
@@ -174,118 +163,126 @@ const ApiBot = (props) => {
     console.log("bot message rendered to screen", getCurrentTimestamp());
   };
   return (
-    <>
-      <div>
-        <div
-          className="chatWindow"
-          id="mainChatWindow"
-          style={{ display: "block", marginTop: "10px" }}
-        >
-          <div className="row padded_row">
-            <div className="col-md-6">
-              <div className="chat_window">
-                <div className="window">
-                  <div className="top_menu">
-                    <div className="title">Hi, Ask your queries</div>
-                    <button
-                      className="btn btn-outline-primary mx-2"
-                      onClick={handleClearChat}
-                    >
-                      clear chat
-                    </button>
-                  </div>
-                  <LoadingBar
-                    color="#ff671b"
-                    progress={progress}
-                    onLoaderFinished={() => setProgress(0)}
-                  />
-                  {/* dynamically rendered */}
-                  <ul className="messages"></ul>
+    // <>
+    //   <div>
+    //     <div
+    //       className="chatWindow"
+    //       id="mainChatWindow"
+    //       style={{ display: "block", marginTop: "10px" }}
+    //     >
+    //       <div className="row padded_row">
+    //         <div className="col-md-6">
+    //           <div className="chat_window">
+    //             <div className="window">
+    //               <div className="top_menu">
+    //                 <div className="title">Hi, Ask your queries</div>
+    //                 <button
+    //                   className="btn btn-outline-primary mx-2"
+    //                   onClick={handleClearChat}
+    //                 >
+    //                   clear chat
+    //                 </button>
+    //               </div>
+    //               <LoadingBar
+    //                 color="#ff671b"
+    //                 progress={progress}
+    //                 onLoaderFinished={() => setProgress(0)}
+    //               />
+    //               {/* dynamically rendered */}
+    //               <ul className="messages"></ul>
 
-                  {/* input */}
-                  <div className="bottom_wrapper ">
-                    <div className="inputholders">
-                      <input
-                        type="text"
-                        className={`form-control ${
-                          inputValue ? "text_border" : ""
-                        }`}
-                        placeholder="Type a message..."
-                        value={inputValue}
-                        onChange={handleInputChange}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            handleSendButtonClick();
-                          }
-                        }}
-                      />
-                      <button
-                        className={`btn btn-outline-warning ${
-                          button ? "fade-in" : "fade-out"
-                        }`}
-                        type="button"
-                        onClick={handleSendButtonClick}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          fill="currentColor"
-                          className="bi bi-send-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* left side content */}
-            <div className="col-md-6">
-              <div className="chat_window">
-                <div className="top_menu">
-                  <div className="title">Help</div>
-                </div>
+    //               {/* input */}
+    //               <div className="bottom_wrapper ">
+    //                 <div className="inputholders">
+    //                   <input
+    //                     type="text"
+    //                     className={`form-control ${
+    //                       inputValue ? "text_border" : ""
+    //                     }`}
+    //                     placeholder="Type a message..."
+    //                     value={inputValue}
+    //                     onChange={handleInputChange}
+    //                     onKeyDown={(e) => {
+    //                       if (e.key === "Enter") {
+    //                         handleSendButtonClick();
+    //                       }
+    //                     }}
+    //                   />
+    //                   <button
+    //                     className={`btn btn-outline-warning ${
+    //                       button ? "fade-in" : "fade-out"
+    //                     }`}
+    //                     type="button"
+    //                     onClick={handleSendButtonClick}
+    //                   >
+    //                     <svg
+    //                       xmlns="http://www.w3.org/2000/svg"
+    //                       width="24"
+    //                       height="24"
+    //                       fill="currentColor"
+    //                       className="bi bi-send-fill"
+    //                       viewBox="0 0 16 16"
+    //                     >
+    //                       <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
+    //                     </svg>
+    //                   </button>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //         {/* left side content */}
+    //         <div className="col-md-6">
+    //           <div className="chat_window">
+    //             <div className="top_menu">
+    //               <div className="title">Help</div>
+    //             </div>
 
-                <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button
-                        class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                        disabled
-                      >
-                        BizMetric Customer Service chatbot
-                      </button>
-                    </h2>
-                    <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse show"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        Hi my name is
-                        <strong> BizMetric Customer Service </strong> chatbot, I
-                        am here to answer your queries about your loans and
-                        other finanace related questions. Type in your query,
-                        and the chatbot will do its best to provide accurate and
-                        helpful information.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    //             <div class="accordion" id="accordionExample">
+    //               <div class="accordion-item">
+    //                 <h2 class="accordion-header">
+    //                   <button
+    //                     class="accordion-button"
+    //                     type="button"
+    //                     data-bs-toggle="collapse"
+    //                     data-bs-target="#collapseOne"
+    //                     aria-expanded="true"
+    //                     aria-controls="collapseOne"
+    //                     disabled
+    //                   >
+    //                     BizMetric Customer Service chatbot
+    //                   </button>
+    //                 </h2>
+    //                 <div
+    //                   id="collapseOne"
+    //                   class="accordion-collapse collapse show"
+    //                   data-bs-parent="#accordionExample"
+    //                 >
+    //                   <div class="accordion-body">
+    //                     Hi my name is
+    //                     <strong> BizMetric Customer Service </strong> chatbot, I
+    //                     am here to answer your queries about your loans and
+    //                     other finanace related questions. Type in your query,
+    //                     and the chatbot will do its best to provide accurate and
+    //                     helpful information.
+    //                   </div>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </>
+    <div>
+      <iframe
+        title="API Bot App"
+        src="http://localhost:5501"
+        className="viewbox"
+        style={{ border: "none" }}
+      />
+    </div>
   );
 };
 

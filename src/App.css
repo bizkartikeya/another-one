@@ -436,7 +436,9 @@ transform: translateY(-50%);
 
 .messages .message.left .avatar {
   float: left;
-  background: url('../public/bot.jpg');
+  background: url('../public/bot.jpg') ;
+  /* background-size: 40px; */
+  height: 40px;
 }
 
 .messages .message.left .text_wrapper {

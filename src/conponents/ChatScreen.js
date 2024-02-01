@@ -424,7 +424,7 @@ class="chart_image"
                         aria-expanded="false"
                         aria-controls="panelsStayOpen-collapseTwo"
                       >
-                        <strong> Data Frame Refernce:</strong>
+                        <strong> Data Frame Reference:</strong>
                       </button>
                     </h2>
                     {referenceDfFlag && (

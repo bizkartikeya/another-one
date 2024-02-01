@@ -11,7 +11,7 @@
         "icon":"pdf.png"
     },{
         "title":"API Based Bot",
-        "description":"A bot to get weather information",
+        "description":"A bot to get Loan related information from external API and get the answers via chat-bot",
         "link":"/ApiBot",
         "icon":"pdf.png"
     }
